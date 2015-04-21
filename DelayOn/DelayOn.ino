@@ -18,6 +18,7 @@
 
 unsigned long TIMER0 = 0;  // Variable to hold elapsed time for Timer 0
 unsigned long TIMER1 = 0;  // Variable to hold elapsed time for Timer 1
+unsigned long TIMER02 = 0;
 
 void setup() {
   setupPLC();              // Setup inputs and outputs
@@ -33,6 +34,15 @@ void loop() {
   in(X1);                  // Read Input 1
   timerOn(TIMER1, 4000);   // 4 second delay
   out(Y1);                 // Output to Output 1
+  
+  in(X2);
+  orBit(Y2);
+  andNotBit(X0);
+  out(Y2);
+  
+  in(Y2);
+  timerOn(TIMER02, 3000);
+  out(Y3);
   
   Serial.println(X0);
   delay(100);        // delay in between reads for stability
