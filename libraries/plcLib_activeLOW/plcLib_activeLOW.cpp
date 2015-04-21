@@ -17,6 +17,7 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details, available from:
   <http://www.gnu.org/licenses/>
+  Modifikasi Aktif LOW : Yosep Prasetya Budi
 */
 
 #include "Arduino.h"
@@ -105,13 +106,29 @@ unsigned int in(int input) {
 // Read an auxiliary input (variable supplied as unsigned integer)
 unsigned int in(unsigned int input) {
 	scanValue = input;
-        return(scanValue);
+    // modifikasi untuk input LOW  Date : 4/21/2015 3:15PM
+    /* */
+    if (scanValue == 1) {
+		scanValue = 0;
+	}
+	else {
+		scanValue = 1;
+	}    
+    return(scanValue);
 }
 
 // Read an auxiliary input (variable supplied as unsigned long)
 unsigned int in(unsigned long input) {
 	scanValue = input;
-        return(scanValue);
+	// modifikasi untuk input LOW  Date : 4/21/2015 3:13PM
+    /* */
+    if (scanValue == 1) {
+		scanValue = 0;
+	}
+	else {
+		scanValue = 1;
+	}
+    return(scanValue);
 }
 
 // Read an inverted input (pin number supplied as integer)
@@ -509,6 +526,7 @@ unsigned int latch(unsigned long &output, unsigned long reset) {
 }
 
 unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
+    // Tidak jadi di rubah
 	if (scanValue == 0) {									// timer is disabled
 		timerState = 0;										// Clear timerState (0 = 'not started')
 	}
