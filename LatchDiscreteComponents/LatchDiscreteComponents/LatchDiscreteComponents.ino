@@ -21,7 +21,7 @@ void setup() {
 }
 
 void loop() {
-  /* latch discrate
+  /* 
   |     X0          X1         Y0
   |----] [----+----]/[---------( )----|
   |     Y0    |
