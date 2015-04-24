@@ -343,14 +343,15 @@ unsigned int orBit(unsigned long input) {
 
 // OR scanValue with inverted input (pin number supplied as integer)
 unsigned int orNotBit(int input) {
+	// modifikasi untuk input LOW  Date : 4/24/2015 8:11AM
 	if (scanValue == 1) {
 	}
 	else {
 		if (digitalRead(input) == 0) {
-			scanValue = 1;
+			scanValue = 0;
 		}
 		else {
-			scanValue = 0;
+			scanValue = 1;
 		}
 	}
 	return(scanValue);

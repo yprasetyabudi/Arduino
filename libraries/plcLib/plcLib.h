@@ -34,8 +34,6 @@ const int Y0 = 3;
 const int Y1 = 5;
 const int Y2 = 6;
 const int Y3 = 9;
-// nanoPLC
-const int Y4 = 10;
 
 const int DIRA = 12;
 const int DIRB = 13;
@@ -113,8 +111,6 @@ unsigned int set(unsigned long &output);
 unsigned int reset(int output);
 unsigned int reset(unsigned int &output);
 unsigned int reset(unsigned long &output);
-//nanoPLC
-unsigned int nandBit(int input);
 
 class Counter
 {

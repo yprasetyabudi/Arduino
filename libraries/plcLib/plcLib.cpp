@@ -38,8 +38,6 @@ void setupPLC() {
 	pinMode(Y1, OUTPUT);
 	pinMode(Y2, OUTPUT);
 	pinMode(Y3, OUTPUT);
-	// nanoPLC
-	pinMode(Y4, OUTPUT);
 
 	// Additional pins for Mega, Mega 2560 and Due boards
 	#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__SAM3X8E__)
@@ -87,26 +85,19 @@ void setupPLC() {
 // Read an input pin (pin number supplied as integer)
 unsigned int in(int input) {
 	scanValue = digitalRead(input);
-        // modifikasi untuk input LOW  Date : 4/19/2015 12:46PM
-        if (scanValue == 1) {
-		scanValue = 0;
-	}
-	else {
-		scanValue = 1;
-	}
 	return(scanValue);
 }
 
 // Read an auxiliary input (variable supplied as unsigned integer)
 unsigned int in(unsigned int input) {
 	scanValue = input;
-        return(scanValue);
+	return(scanValue);
 }
 
 // Read an auxiliary input (variable supplied as unsigned long)
 unsigned int in(unsigned long input) {
 	scanValue = input;
-        return(scanValue);
+	return(scanValue);
 }
 
 // Read an inverted input (pin number supplied as integer)
@@ -234,14 +225,7 @@ unsigned int outPWM(int output) {
 
 // AND scanValue with input (pin number supplied as integer)
 unsigned int andBit(int input) {
-        // modifikasi untuk input LOW  Date : 4/19/2015 12:56PM
-        if (digitalRead(input)== 1) {
-		input= 0;
-	}
-	else {
-		input = 1;
-	}
-	scanValue = scanValue & input;
+	scanValue = scanValue & digitalRead(input);
 	return(scanValue);
 }
 
@@ -277,14 +261,7 @@ unsigned int andNotBit(unsigned long input) {
 
 // OR scanValue with input (pin number supplied as integer)
 unsigned int orBit(int input) {
-	// modifikasi untuk input LOW  Date : 4/19/2015 12:5PM
-	if (digitalRead(input)== 1) {
-		input= 0;
-	}
-	else {
-		input = 1;
-	}
-	scanValue = scanValue | input;
+	scanValue = scanValue | digitalRead(input);
 	return(scanValue);
 }
 
@@ -347,14 +324,7 @@ unsigned int orNotBit(unsigned long input) {
 
 // XOR scanValue with input (pin number supplied as integer)
 unsigned int xorBit(int input) {
-	// modifikasi untuk input LOW  Date : 4/19/2015 1:09PM
-	if (digitalRead(input)== 1) {
-		input= 0;
-	}
-	else {
-		input = 1;
-	}
-	scanValue = scanValue ^ input;
+	scanValue = scanValue ^ digitalRead(input);
 	return(scanValue);
 }
 
@@ -672,26 +642,6 @@ unsigned int reset(unsigned long &output) {
 	}
 	return(scanValue);
 }
-//
-// NAND scanValue with input (pin number supplied as integer)
-unsigned int nandBit(int input) {
-        // modifikasi untuk input LOW  Date : 4/19/2015 12:56PM
-        if (digitalRead(input)== 1) {
-		input= 0;
-	}
-	else {
-		input = 1;
-	}
-	scanValue = scanValue & input;
-	if (scanValue == 1) {
-		scanValue = 0;
-	}
-	else {
-		scanValue = 1;
-	}
-	return(scanValue);
-}
-
 
 // Up, down, or up-down counter
 Counter::Counter(unsigned int pv)	// Counter constructor method
