@@ -1,4 +1,5 @@
 #include <plcLib.h>
+//#include <plcLib_activeLOW.h>
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
 
@@ -21,11 +22,24 @@ void setup() {
 }
 
 void loop() {
+  /* Set unset variabel
+  |     X0                   SAUX0
+  |-----| |-------------------( )----|
+  |
+  |     X1                   UAUX0
+  |-----| |-------------------( )----|
+  |
+  |     AUX0                  Y0
+  |-----| |-------------------( )----| 
+  |
+  */
   in(X0);              // Read switch connected to Input 0 (Set input)
   set(AUX0);           // Set AUX0 to 1 if X0 = 1, leave unaltered otherwise
 
   in(X1);              // Read switch connected to X1
-  unset(AUX0);         // Clear AUX0 to 0 if X1 = 1, leave unaltered otherwise
+  //unset(AUX0);         // Clear AUX0 to 0 if X1 = 1, leave unaltered otherwise
+  reset(AUX0);         // Clear AUX0 to 0 if X1 = 1, leave unaltered otherwise
+  
   
   in(AUX0);            // Read auxiliary variable AUX0
   out(Y0);             // Output to Y0

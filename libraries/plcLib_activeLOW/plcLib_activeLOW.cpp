@@ -107,33 +107,33 @@ unsigned int in(int input) {
 unsigned int in(unsigned int input) {
 	scanValue = input;
     // modifikasi untuk input LOW  Date : 4/21/2015 3:15PM
-    /* */
+    /* 
     if (scanValue == 1) {
 		scanValue = 0;
 	}
 	else {
 		scanValue = 1;
-	}    
+	} */   
     return(scanValue);
 }
 
 // Read an auxiliary input (variable supplied as unsigned long)
 unsigned int in(unsigned long input) {
 	scanValue = input;
-	// modifikasi untuk input LOW  Date : 4/21/2015 3:13PM
-    /* */
+	// modifikasi untuk input aktif LOW  Date : 4/21/2015 3:13PM
+    /* 
     if (scanValue == 1) {
 		scanValue = 0;
 	}
 	else {
 		scanValue = 1;
-	}
+	} */
     return(scanValue);
 }
 
 // Read an inverted input (pin number supplied as integer)
 unsigned int inNot(int input) {
-	// modifikasi untuk input LOW  Date : 4/21/2015 9:44PM
+	// modifikasi untuk input aktif LOW  Date : 4/21/2015 9:44PM
     if (digitalRead(input) == 1) {
 		scanValue = 1;
 	}
@@ -267,13 +267,15 @@ unsigned int outNot(unsigned long &output) {
 
 // Output a PWM value to an output pin (scanValue in range 0-1023)
 unsigned int outPWM(int output) {
-	analogWrite(output, scanValue / 4);
+	//analogWrite(output, scanValue / 4);
+	// modifikasi untuk input aktif LOW  Date : 4/25/2015 10:24AM
+	analogWrite(output, 1023 - (scanValue / 4));
 	return(scanValue);
 }
 
 // AND scanValue with input (pin number supplied as integer)
 unsigned int andBit(int input) {
-    // modifikasi untuk input LOW  Date : 4/19/2015 12:56PM
+    // modifikasi untuk input aktif LOW  Date : 4/19/2015 12:56PM
     if (digitalRead(input)== 1) {
 		input= 0;
 	}
@@ -711,6 +713,14 @@ unsigned int set(int output) {
 
 // Set a latched output (variable supplied as unsigned integer)
 unsigned int set(unsigned int &output) {
+	// modifikasi untuk aktif LOW  Date : 5/1/2015 4:47PM
+	/*unsigned int nilOutput = 0;
+    if (output == 0) {
+		nilOutput = 1;
+	}
+	else {
+		nilOutput = 0;
+	}	*/
 	scanValue = scanValue | output;		// Self latch by ORing with Output pin
 	if (scanValue == 1) {
 		output = 1;
@@ -754,7 +764,36 @@ unsigned int reset(unsigned long &output) {
 	}
 	return(scanValue);
 }
-//
+// modifikasi penambahan fungsi unset()
+// reset (or clear) a latched output (output pin number supplied as integer)
+unsigned int unset(int output) {
+	/*if (scanValue == 1) {
+		digitalWrite(output, LOW);
+	} */
+    // modifikasi untuk aktif LOW  Date : 4/20/2015 12:49PM
+    if (scanValue == 1) {
+		digitalWrite(output, HIGH);
+	}
+	return(scanValue);
+}
+// reset (or clear) a latched output (variable supplied as unsigned integer)
+unsigned int unset(unsigned int &output) {
+	if (scanValue == 1) {
+		output = 0;
+	}
+	return(scanValue);
+}
+
+// reset (or clear) a latched output (variable supplied as unsigned long)
+unsigned int unset(unsigned long &output) {
+	if (scanValue == 1) {
+		output = 0;
+	}
+	return(scanValue);
+}
+// akhir dari mondifikasi - penambahan fungsi unset()
+
+// Modifikasi - penambahan fungsi nanBit()
 // NAND scanValue with input (pin number supplied as integer)
 unsigned int nandBit(int input) {
         // modifikasi untuk input LOW  Date : 4/19/2015 12:56PM
@@ -773,7 +812,18 @@ unsigned int nandBit(int input) {
 	}
 	return(scanValue);
 }
+// NAND scanValue with auxiliary variable (variable supplied as unsigned integer)
+unsigned int nandBit(unsigned int input) {
+	scanValue = scanValue & input;
+	return(scanValue);
+}
+// Akhir dari modifikasi - penambahan fungsi nandBit()
 
+// NAND scanValue with auxiliary variable (variable supplied as unsigned long)
+unsigned int nandBit(unsigned long input) {
+	scanValue = scanValue & input;
+	return(scanValue);
+}
 
 // Up, down, or up-down counter
 Counter::Counter(unsigned int pv)	// Counter constructor method

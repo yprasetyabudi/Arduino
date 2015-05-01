@@ -1,4 +1,5 @@
-#include <plcLib.h>
+//#include <plcLib.h>
+#include <plcLib_activeLOW.h>
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
 
@@ -24,6 +25,19 @@ void setup() {
 }
 
 void loop() {
+    /*
+  |                 +---------------+
+  |    X0           |    Counter    |           Y0
+  |----] {----------|countUp  upperQ|-----------( )------|
+  |    X1           |               |
+  |----] [----------|countDown      |
+  |    X3           |    presetValue|--10
+  |----] [----------|preset    count|--5
+  |    X2           |               |           Y0
+  |----] [----------|clear    lowerQ|-----------( )------|
+  |                 +---------------+ 
+  |
+  */
   in(X0);                  // Read Input 0
   timerOn(TIMER0, 10);     // 10 ms switch debounce delay
   ctr.countDown();         // Count down

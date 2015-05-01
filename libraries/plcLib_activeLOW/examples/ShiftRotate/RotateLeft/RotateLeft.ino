@@ -1,4 +1,5 @@
-#include <plcLib.h>
+//#include <plcLib.h>
+#include <plcLib_activeLOW.h>
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
 
@@ -17,7 +18,7 @@
 
 */
 
-Shift shift1(0x0001);      // Create a shift register with initial value 0x0001
+Shift shift1(0x0011);      // Create a shift register with initial value 0x0001
                            // (Rightmost 4 bits are rotated to the left)
 
                            //    Outputs         Y Y Y Y

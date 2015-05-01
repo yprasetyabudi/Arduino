@@ -21,11 +21,13 @@ void setup() {
 }
 
 void loop() {
+  /* SetReset Command
   |      X1                   SY1
   |-----| |-------------------( )----|
   |      X2                   RY1
   |-----| |-------------------( )----|
   |
+  */
   in(X1);              // Read switch connected to Input 0 (Set input)
   set(Y1);             // Set Y0 to 1 if X0 = 1, leave Y0 unaltered otherwise
 

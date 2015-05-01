@@ -113,8 +113,13 @@ unsigned int set(unsigned long &output);
 unsigned int reset(int output);
 unsigned int reset(unsigned int &output);
 unsigned int reset(unsigned long &output);
-//nanoPLC
+//nanoPLC aktif LOW
 unsigned int nandBit(int input);
+unsigned int nandBit(unsigned int input);
+unsigned int nandBit(unsigned long input);
+unsigned int unset(int output);
+unsigned int unset(unsigned int &output);
+unsigned int unset(unsigned long &output);
 
 class Counter
 {
