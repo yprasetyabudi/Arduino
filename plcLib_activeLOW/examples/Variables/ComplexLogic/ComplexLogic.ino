@@ -1,5 +1,4 @@
-//#include <plcLib.h>
-#include <plcLib_activeLOW.h>
+#include <plcLib.h>
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
 
@@ -36,16 +35,6 @@ void setup() {
 }
 
 void loop() {
-   /*
-   |                                   
-   |     X0         X1          Y0     
-   |----] [----+----]/[----+----( )----|
-   |                       | 
-   |     X2         X3     |
-   |----] [----+----] [----+        
-   |                               
-   |                               
-   */
                     // Solve first branch
   in(X0);           // Read Input 0
   andNotBit(X1);    // AND with inverted Input 1

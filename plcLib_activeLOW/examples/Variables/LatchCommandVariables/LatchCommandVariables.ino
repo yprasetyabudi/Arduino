@@ -1,5 +1,4 @@
-//#include <plcLib.h>
-#include <plcLib_activeLOW.h>
+#include <plcLib.h>
 
 /* Programmable Logic Controller Library for the Arduino and Compatibles
 

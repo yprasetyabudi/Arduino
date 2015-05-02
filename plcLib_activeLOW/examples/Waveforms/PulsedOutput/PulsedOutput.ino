@@ -1,0 +1,43 @@
+//#include <plcLib.h>
+#include <plcLib_activeLOW.h>
+
+/* Programmable Logic Controller Library for the Arduino and Compatibles
+
+   Pulsed Output - Creating a repeating pulse using the timerCycle command
+
+   Connections:
+   Input - Enable input connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
+   Output - Pulse Waveform on LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+
+   Software and Documentation:
+   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+
+*/
+
+// Variables:
+unsigned long AUX0 = 0;                 // Pulse low timer variable
+unsigned long AUX1 = 0;                 // Pulse high timer variable
+
+
+void setup() {
+  setupPLC();                           // Define inputs and outputs
+}
+
+void loop() {
+  /*
+                    +----------+
+   |     X0         |timerCycle|            Y0
+   |-----] [--------|EN       Q|-----------(  )----|
+   |           AUX0-|TL_VAR    |
+                900-|TL_DELAY  |
+               AUX1-|TH_VAR    |
+                100-|TH_DELAY  |
+                    +----------+ 
+   
+   */
+   
+  in(X0);                              // Read Enable input (1 = enable)
+  timerCycle(AUX0, 900, AUX1, 100);     // Repeating pulse, low = 0.9 s, high = 0.1 s
+                                        // (hence period = 1 second)
+  out(Y0);                              // Send pulse waveform to Output 0
+}
